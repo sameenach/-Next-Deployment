@@ -7,35 +7,31 @@ async function ProductList() {
         "https://fakestoreapi.com/products"
     );
 
+    if (!response.ok) {
+        throw new Error("Failed to fetch products");
+    }
+
     const data = await response.json();
 
     return (
         <main className="product-page">
-            
             <h1 className="product-heading">
-    Shop<span>Ex.</span>
-</h1>
-<p className="product-tagline">Find your style. Love your look.</p>
+                Shop<span>Ex.</span>
+            </h1>
+            <p className="product-tagline">
+                Find your style. Love your look.
+            </p>
 
             <div className="product-container">
                 {data.map((prod: any) => (
                     <div className="product-card" key={prod.id}>
                         <div className="product-image-box">
-                            <img
-                                className="product-image"
-                                src={prod.image}
-                                alt={prod.title}
-                            />
+                            <img src={prod.image} alt={prod.title} className="product-image" />
                         </div>
 
                         <div className="product-info">
-                            <h3 className="product-title">
-                                {prod.title}
-                            </h3>
-
-                            <p className="product-description">
-                                {prod.description}
-                            </p>
+                            <h3 className="product-title">{prod.title}</h3>
+                            <p className="product-description">{prod.description}</p>
 
                             <div className="product-rating">
                                 ⭐ {prod.rating.rate}
@@ -43,14 +39,8 @@ async function ProductList() {
                             </div>
 
                             <div className="product-bottom">
-                                <h2 className="product-price">
-                                    ${prod.price}
-                                </h2>
-
-                                <button
-                                    className="product-button"
-                                    type="button"
-                                >
+                                <h2 className="product-price">${prod.price}</h2>
+                                <button className="product-button" type="button">
                                     View More
                                 </button>
                             </div>
