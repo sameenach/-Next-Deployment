@@ -1,61 +1,53 @@
 
-import { Suspense } from "react";
-import "./product.css";
-
-async function ProductList() {
-    const response = await fetch(
-        "https://fakestoreapi.com/products"
-    );
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch products");
-    }
-
-    const data = await response.json();
-
-    return (
-        <main className="product-page">
-            <h1 className="product-heading">
-                Shop<span>Ex.</span>
-            </h1>
-            <p className="product-tagline">
-                Find your style. Love your look.
-            </p>
-
-            <div className="product-container">
-                {data.map((prod: any) => (
-                    <div className="product-card" key={prod.id}>
-                        <div className="product-image-box">
-                            <img src={prod.image} alt={prod.title} className="product-image" />
-                        </div>
-
-                        <div className="product-info">
-                            <h3 className="product-title">{prod.title}</h3>
-                            <p className="product-description">{prod.description}</p>
-
-                            <div className="product-rating">
-                                ⭐ {prod.rating.rate}
-                                <span> ({prod.rating.count} reviews)</span>
-                            </div>
-
-                            <div className="product-bottom">
-                                <h2 className="product-price">${prod.price}</h2>
-                                <button className="product-button" type="button">
-                                    View More
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </main>
-    );
-}
+import Image from 'next/image';
+import React from 'react';
+import Link from 'next/link';
+import './home.css';
 
 export default function Home() {
-    return (
-        <Suspense fallback={<p className="loading">Loading products...</p>}>
-            <ProductList />
-        </Suspense>
-    );
+  return (
+    <main className="home-page">
+      <section className="hero-section">
+        <div className="hero-content">
+          <p className="welcome-text">WELCOME TO MY WEBSITE</p>
+
+          <h1>
+            Welcome To <span>The Web</span>
+          </h1>
+
+          <p className="description">
+            Explore a colorful world of creativity, fun, and imagination.
+            Discover something wonderful every time you visit!
+          </p>
+
+          <Link href="#about" className="explore-button">
+            Explore More
+          </Link>
+        </div>
+
+        <div className="hero-image">
+          <Image
+            src="/masha.jpg"
+            alt="Masha"
+            height={500}
+            width={500}
+            priority
+          />
+        </div>
+      </section>
+
+      <section className="about-section" id="about">
+        <h2>About This Website</h2>
+        <p>
+          This is my little corner of the web, created to share happiness,
+          creativity, and beautiful moments. I hope you enjoy exploring!
+        </p>
+      </section>
+    </main>
+  );
 }
+
+
+
+
+ 
